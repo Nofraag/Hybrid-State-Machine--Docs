@@ -1,3 +1,5 @@
 site_name: Hybrid State Machine
 theme:
   name: material
+  palette:
+    scheme: slate
