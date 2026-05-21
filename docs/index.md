@@ -250,7 +250,7 @@ In this example, if `SprintingState` tries to activate while `FocusedState` is a
 - `SprintingState` (0.6) **>** `FocusedState` (0.5) → Sprinting wins, Focused is removed
 - If the weights were reversed, Sprinting would be blocked entirely
 
-> **Important:** only the state that is trying to activate needs to list the conflict in its `illegalStates`. You don't need to add it on both sides.
+> **Important:** you only need to declare the conflict on one side. If either state lists the other as illegal, they can never be active together — you don't need to add it on both sides.
 
 ---
 
