@@ -1203,7 +1203,7 @@
 - <code>SprintingState</code> (0.6) <strong>&gt;</strong> <code>FocusedState</code> (0.5) → Sprinting wins, Focused is removed
 - If the weights were reversed, Sprinting would be blocked entirely</p>
 <blockquote>
-<p><strong>Important:</strong> only the state that is trying to activate needs to list the conflict in its <code>illegalStates</code>. You don't need to add it on both sides.</p>
+<p><strong>Important:</strong> you only need to declare the conflict on one side. If either state lists the other as illegal, they can never be active together — you don't need to add it on both sides.</p>
 </blockquote>
 <hr />
 <h2 id="oneshot-cooldown">OneShot &amp; Cooldown</h2>
