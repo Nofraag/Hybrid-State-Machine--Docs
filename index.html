@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#layered-state-machine-documentation" class="md-skip">
+        <a href="#stateforge-layered-state-machine" class="md-skip">
           Skip to content
         </a>
       
@@ -791,6 +791,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#state-members" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Members
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1308,6 +1319,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#state-members" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Members
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1340,7 +1362,7 @@
 
 
 
-<h1 id="layered-state-machine-documentation">Layered State Machine — Documentation<a class="headerlink" href="#layered-state-machine-documentation" title="Permanent link">&para;</a></h1>
+<h1 id="stateforge-layered-state-machine">StateForge — Layered State Machine<a class="headerlink" href="#stateforge-layered-state-machine" title="Permanent link">&para;</a></h1>
 <h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
 <ol>
 <li><a href="#core-concepts">Core Concepts</a></li>
@@ -1359,7 +1381,7 @@
 </ol>
 <hr />
 <h2 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h2>
-<p>Layered State Machine is built around four core blocks:</p>
+<p>StateForge is built around four core blocks:</p>
 <table>
 <thead>
 <tr>
@@ -1395,10 +1417,10 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="c1">// priority used in conflict resolution</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">stateWeight</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1">// states that cannot be active at the same time as this one</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="w"> </span><span class="n">illegalStates</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1">// types of states that cannot be active at the same time as this one</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">illegalStates</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">SprintingState</span><span class="p">()</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="k">typeof</span><span class="p">(</span><span class="n">SprintingState</span><span class="p">)</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p">};</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnAdd</span><span class="p">()</span><span class="w">     </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&quot;Focused started.&quot;</span><span class="p">);</span>
@@ -1430,7 +1452,10 @@
 </tbody>
 </table>
 <p><code>stateWeight</code> is required and determines who wins when two conflicting states compete. See <a href="#illegal-states--weight-system">Illegal States &amp; Weight System</a>.</p>
-<p><code>illegalStates</code> is optional. Leave it empty if this state has no conflicts.</p>
+<p><code>illegalStates</code> is optional and returns a <code>List&lt;Type&gt;</code> — reference conflicting states with <code>typeof(...)</code> rather than constructing them. Leave it empty if this state has no conflicts.</p>
+<blockquote>
+<p><strong>Why <code>Type</code> instead of an instance?</strong> Earlier versions of StateForge used <code>List&lt;State&gt;</code>, which meant listing a conflict required constructing another state object (<code>new SprintingState()</code>). If two states ever referenced each other this way, it could cascade into unnecessary allocations or recursive construction. Using <code>typeof(SprintingState)</code> avoids that entirely — you're pointing at a type, not building an object.</p>
+</blockquote>
 <hr />
 <h2 id="stateentry">StateEntry<a class="headerlink" href="#stateentry" title="Permanent link">&para;</a></h2>
 <p><code>StateEntry</code> defines how a state behaves when subscribed to the machine.</p>
@@ -1551,14 +1576,14 @@
 </code></pre></div>
 <hr />
 <h2 id="illegal-states-weight-system">Illegal States &amp; Weight System<a class="headerlink" href="#illegal-states-weight-system" title="Permanent link">&para;</a></h2>
-<p>Illegal states are states that <strong>cannot be active at the same time</strong>. When two conflicting states compete, <code>stateWeight</code> decides the winner — the higher weight wins.</p>
+<p>Illegal states are state <strong>types</strong> that <strong>cannot be active at the same time</strong>. When two conflicting states compete, <code>stateWeight</code> decides the winner — the higher weight wins.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">FocusedState</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">State</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">{</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">stateWeight</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="w"> </span><span class="n">illegalStates</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">illegalStates</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span>
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">SprintingState</span><span class="p">()</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="k">typeof</span><span class="p">(</span><span class="n">SprintingState</span><span class="p">)</span>
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="p">};</span>
 <a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="p">}</span>
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
@@ -1571,7 +1596,7 @@
 - <code>SprintingState</code> (0.6) <strong>&gt;</strong> <code>FocusedState</code> (0.5) → Sprinting wins, Focused is removed.
 - If the weights were reversed, Sprinting would be blocked entirely.</p>
 <blockquote>
-<p>You only need to declare the conflict on one side. If either state lists the other as illegal, they can never be active at the same time.</p>
+<p>You only need to declare the conflict on one side. If either state lists the other's type as illegal, they can never be active at the same time.</p>
 </blockquote>
 <h3 id="bypassing-the-weight-system">Bypassing the weight system<a class="headerlink" href="#bypassing-the-weight-system" title="Permanent link">&para;</a></h3>
 <p>Set <code>respectWeight = false</code> on a <code>StateEntry</code> to make a state activate regardless of conflicts. It will never be blocked or removed by weight resolution.</p>
@@ -1895,6 +1920,43 @@
 </tr>
 </tbody>
 </table>
+<h3 id="state-members"><code>State</code> Members<a class="headerlink" href="#state-members" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stateWeight</code></td>
+<td><code>float</code> (abstract)</td>
+<td>Priority used to resolve conflicts between illegal states</td>
+</tr>
+<tr>
+<td><code>illegalStates</code></td>
+<td><code>List&lt;Type&gt;</code></td>
+<td>Types of states that cannot be active at the same time as this one</td>
+</tr>
+<tr>
+<td><code>OnAdd()</code></td>
+<td><code>void</code></td>
+<td>Called once when the state becomes active</td>
+</tr>
+<tr>
+<td><code>OnRemoval()</code></td>
+<td><code>void</code></td>
+<td>Called once when the state is deactivated</td>
+</tr>
+<tr>
+<td><code>OnUpdate()</code></td>
+<td><code>void</code></td>
+<td>Called every Unity Update while the state is active</td>
+</tr>
+</tbody>
+</table>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1917,6 +1979,7 @@
 </tr>
 </tbody>
 </table>
+<hr />
 
 
 
