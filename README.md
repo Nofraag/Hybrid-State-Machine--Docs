@@ -5,7 +5,7 @@ Drag `StateForge.unitypackage` into your Unity project's Assets folder. Unity wi
 ## Documentation
 
 Full documentation, API reference, and examples are available at:
-[nofraag.github.io/LayeredStateMachine-Documentation-](https://nofraag.github.io/LayeredStateMachine-Documentation-/)
+[https://nofraag.github.io/StateForge-Docs/](https://nofraag.github.io/StateForge-Docs/)
 
 ## What's Included
 
