@@ -1,4 +1,4 @@
-# Layered State Machine — Documentation
+# StateForge — Layered State Machine
 
 ## Table of Contents
 1. [Core Concepts](#core-concepts)
@@ -19,7 +19,7 @@
 
 ## Core Concepts
 
-Layered State Machine is built around four core blocks:
+StateForge is built around four core blocks:
 
 | Block | What it is |
 |---|---|
@@ -42,10 +42,10 @@ public class FocusedState : State
     // priority used in conflict resolution
     public override float stateWeight => 0.5f;
 
-    // states that cannot be active at the same time as this one
-    public override List<State> illegalStates => new List<State>
+    // types of states that cannot be active at the same time as this one
+    public override List<Type> illegalStates => new List<Type>
     {
-        new SprintingState()
+        typeof(SprintingState)
     };
 
     public override void OnAdd()     => Debug.Log("Focused started.");
@@ -64,7 +64,9 @@ public class FocusedState : State
 
 `stateWeight` is required and determines who wins when two conflicting states compete. See [Illegal States & Weight System](#illegal-states--weight-system).
 
-`illegalStates` is optional. Leave it empty if this state has no conflicts.
+`illegalStates` is optional and returns a `List<Type>` — reference conflicting states with `typeof(...)` rather than constructing them. Leave it empty if this state has no conflicts.
+
+> **Why `Type` instead of an instance?** Earlier versions of StateForge used `List<State>`, which meant listing a conflict required constructing another state object (`new SprintingState()`). If two states ever referenced each other this way, it could cascade into unnecessary allocations or recursive construction. Using `typeof(SprintingState)` avoids that entirely — you're pointing at a type, not building an object.
 
 ---
 
@@ -246,16 +248,16 @@ new ConditionBinding(new ContainStateCondition(new FocusedState(), desiredResult
 
 ## Illegal States & Weight System
 
-Illegal states are states that **cannot be active at the same time**. When two conflicting states compete, `stateWeight` decides the winner — the higher weight wins.
+Illegal states are state **types** that **cannot be active at the same time**. When two conflicting states compete, `stateWeight` decides the winner — the higher weight wins.
 
 ```csharp
 public class FocusedState : State
 {
     public override float stateWeight => 0.5f;
 
-    public override List<State> illegalStates => new List<State>
+    public override List<Type> illegalStates => new List<Type>
     {
-        new SprintingState()
+        typeof(SprintingState)
     };
 }
 
@@ -269,7 +271,7 @@ If `SprintingState` tries to activate while `FocusedState` is active:
 - `SprintingState` (0.6) **>** `FocusedState` (0.5) → Sprinting wins, Focused is removed.
 - If the weights were reversed, Sprinting would be blocked entirely.
 
-> You only need to declare the conflict on one side. If either state lists the other as illegal, they can never be active at the same time.
+> You only need to declare the conflict on one side. If either state lists the other's type as illegal, they can never be active at the same time.
 
 ### Bypassing the weight system
 
@@ -526,9 +528,21 @@ Each entry is expandable and shows the full details of that state or event.
 | `oneWay` | `bool` | `false` | If `true`, bindings can activate the state but never deactivate it |
 | `overwrite` | `bool` | `false` | If `true`, re-subscribing a state replaces the existing entry instead of being discarded |
 
+### `State` Members
+
+| Member | Type | Description |
+|---|---|---|
+| `stateWeight` | `float` (abstract) | Priority used to resolve conflicts between illegal states |
+| `illegalStates` | `List<Type>` | Types of states that cannot be active at the same time as this one |
+| `OnAdd()` | `void` | Called once when the state becomes active |
+| `OnRemoval()` | `void` | Called once when the state is deactivated |
+| `OnUpdate()` | `void` | Called every Unity Update while the state is active |
+
 ### Events
 
 | Event | Signature | Fires when |
 |---|---|---|
 | `OnStateChanged` | `Action<State, StateQuery>` | A state is activated, deactivated, or blocked — includes reason via `StateQuery` |
 | `OnSubscribeChange` | `Action<State, StateQuery, StateEntry>` | A state is subscribed or unsubscribed |
+
+---
